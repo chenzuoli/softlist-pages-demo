@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>软件详情 - 乐知软件园</title>
+    <!-- 引入Bootstrap CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/bootstrap-icons.css">
+    <style>
+        .software-image {
+            max-height: 400px;
+            object-fit: cover;
+            width: 100%;
+        }
+        .download-section {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        .back-button {
+            margin-bottom: 2rem;
+        }
+        .features-list {
+            margin: 2rem 0;
+        }
+        .features-list li {
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">乐知软件园</a>
+        </div>
+    </nav>
+
+    <!-- 主要内容区 -->
+    <div class="container my-5">
+        <!-- 返回按钮 -->
+        <div class="back-button">
+            <a href="index.html" class="btn btn-outline-primary">
+                <i class="bi bi-arrow-left"></i> 返回列表
+            </a>
+        </div>
+
+        <!-- 软件详情内容 -->
+        <div id="software-detail">
+            <!-- 内容将通过JavaScript动态生成 -->
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>关于我们</h5>
+                    <p>乐知软件园致力于为用户提供优质的开源软件解决方案，推动开源社区的发展。</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>联系方式</h5>
+                    <p>地址：北京市朝阳区科技园区888号</p>
+                    <p>电话：010-88888888</p>
+                    <p>邮箱：contact@lezhi.com</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>关注我们</h5>
+                    <div class="social-icons">
+                        <a href="#" target="_blank"><i class="bi bi-weixin"></i></a>
+                        <a href="#" target="_blank"><i class="bi bi-github"></i></a>
+                        <a href="#" target="_blank"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="bi bi-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 乐知软件园. 保留所有权利.</p>
+                <br>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入Bootstrap JS和依赖 -->
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 软件数据（实际应用中应该从服务器获取）
+        const softwareList = [
+            {
+                id: 1,
+                name: "软件A",
+                category: "image",
+                description: "这是一个示例软件A的简短描述",
+                details: "这是软件A的详细说明，包含了使用方法和特性介绍。软件A是一款功能强大的图片处理工具，支持多种图片格式的转换、编辑和优化。",
+                features: [
+                    "支持多种图片格式转换",
+                    "批量处理功能",
+                    "智能图片优化",
+                    "简单易用的界面"
+                ],
+                version: "1.0.0",
+                size: "50MB",
+                updateDate: "2024-01-15",
+                systemRequirements: "Windows 10/11, macOS 10.15+",
+                downloadUrl: "https://example.com/download/softwareA",
+                imageUrl: "https://via.placeholder.com/800x400?text=软件A详情图"
+            },
+            {
+                id: 2,
+                name: "软件B",
+                category: "python",
+                description: "这是一个示例软件B的简短描述",
+                details: "这是软件B的详细说明，包含了使用方法和特性介绍。软件B是一个Python开发工具包，提供了丰富的开发组件和工具。",
+                features: [
+                    "Python代码自动补全",
+                    "代码调试工具",
+                    "项目管理功能",
+                    "集成开发环境"
+                ],
+                version: "2.1.0",
+                size: "100MB",
+                updateDate: "2024-01-20",
+                systemRequirements: "Windows 10/11, macOS 10.15+, Linux",
+                downloadUrl: "https://example.com/download/softwareB",
+                imageUrl: "https://via.placeholder.com/800x400?text=软件B详情图"
+            }
+        ];
+
+        // 获取URL参数中的软件ID
+        function getSoftwareId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return parseInt(urlParams.get('id'));
+        }
+
+        // 渲染软件详情
+        function renderSoftwareDetail() {
+            const id = getSoftwareId();
+            const software = softwareList.find(s => s.id === id);
+            
+            if (!software) {
+                document.getElementById('software-detail').innerHTML = '<div class="alert alert-danger">未找到相关软件信息</div>';
+                return;
+            }
+
+            const detailHtml = `
+                <h1 class="mb-4">${software.name}</h1>
+                <img src="${software.imageUrl}" alt="${software.name}详情图" class="software-image mb-4">
+                
+                <div class="row">
+                    <div class="col-md-8">
+                        <h3>软件介绍</h3>
+                        <p>${software.details}</p>
+
+                        <h3>主要功能</h3>
+                        <ul class="features-list">
+                            ${software.features.map(feature => `<li>${feature}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="download-section">
+                            <h4>下载信息</h4>
+                            <p><strong>版本：</strong>${software.version}</p>
+                            <p><strong>大小：</strong>${software.size}</p>
+                            <p><strong>更新日期：</strong>${software.updateDate}</p>
+                            <p><strong>系统要求：</strong>${software.systemRequirements}</p>
+                            <a href="${software.downloadUrl}" class="btn btn-primary btn-lg w-100">
+                                <i class="bi bi-download"></i> 立即下载
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('software-detail').innerHTML = detailHtml;
+            document.title = `${software.name} - 乐知软件园`;
+        }
+
+        // 页面加载完成后渲染软件详情
+        document.addEventListener('DOMContentLoaded', renderSoftwareDetail);
+    </script>
+</body>
+</html>

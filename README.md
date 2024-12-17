@@ -4,7 +4,7 @@
 ![main](./images/main.png)
 
 软件详情：
-![detail](./images/detail.png)
+![detail](./images/software-detail.png)
 
 
 # 乐知软件园
